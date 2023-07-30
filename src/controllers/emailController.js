@@ -1,11 +1,12 @@
-const Email = require('../models/email');
+const Email = require('../models/Email');
 
 const sendEmail = async (req,res) => 
 {
 
-const {subject,body} = req.body;
+const {reciever,subject,body} = req.body;
 try {
 const newEmail = new Email({
+    reciever:reciever,
     subject:subject,
     body:body,
     user:req.user.userId });
