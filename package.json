@@ -7,7 +7,7 @@
     "start": "nodemon src/index.js"
   },
   "engines":{
-    "nodemon": ">=14 <15"
+    "node": ">=14 <15"
   },
   "keywords": [],
   "author": "",
