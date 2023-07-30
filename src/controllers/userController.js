@@ -1,7 +1,7 @@
-const User = require('../models/users');
+const User = require('../models/User');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const Users = require('../models/users');
+const Users = require('../models/User');
 const SECRET_KEY = "BrijenShah";
 
 // User Signup
