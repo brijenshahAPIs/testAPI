@@ -4,10 +4,10 @@ const {getReceiveEmail,getSentEmail,sendEmail, updateEmail,deleteEmail} = requir
 const auth = require("../middlewares/auth");
 const emailRouter = express.Router();
 
-emailRouter.get('/emails/inbox',auth,getReceiveEmail);
-emailRouter.get('/emails/sent',auth,getSentEmail);
-emailRouter.post('/emails/send',auth,sendEmail);
-emailRouter.put('/emails/:id',auth,updateEmail);
-emailRouter.delete('emails/:id',auth,deleteEmail);
+emailRouter.get('/inbox',auth,getReceiveEmail);
+emailRouter.get('/sent',auth,getSentEmail);
+emailRouter.post('/send',auth,sendEmail);
+emailRouter.put('/:id',auth,updateEmail);
+emailRouter.delete('/:id',auth,deleteEmail);
 
 module.exports = emailRouter;
