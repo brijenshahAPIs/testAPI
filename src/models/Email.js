@@ -19,13 +19,13 @@ const emailSchema = new Schema({
         type : String, 
         required : true
     },
-    isDeletedBySender : {
+   isDeletedBySender : {
         type : Boolean,
-        required : true
+        default : false
     },
     isDeletedByReceiever : {
         type : Boolean,
-        required : true
+        default : false
     },
     user :{ 
         type : Schema.Types.ObjectId,
