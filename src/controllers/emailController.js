@@ -3,12 +3,15 @@ const Email = require('../models/Email');
 const sendEmail = async (req,res) => 
 {
 
-const {reciever,subject,body} = req.body;
+const {sender,reciever,subject,body,isDeletedBySender,isDeletedByReceiever} = req.body;
 try {
 const newEmail = new Email({
+    sender : sender,
     reciever:reciever,
     subject:subject,
     body:body,
+    isDeletedBySender:isDeletedBySender,
+    isDeletedByReceiever : isDeletedByReceiever,
     user:req.user.userId });
 
     await newEmail.save();
@@ -19,7 +22,7 @@ const newEmail = new Email({
 }
 }
 
-const getEmail = async (req,res) =>
+const getSentEmail = async (req,res) =>
 {
     try{
 
@@ -29,6 +32,38 @@ const getEmail = async (req,res) =>
     }catch(error)
     {
         res.status(500).json({error:"Something went wrong"})
+    }
+}
+
+const getReceiveEmail = async (req,res) =>
+{
+    try {
+        const emails = await Email.find({reciever:req.Email.reciever})
+        res.status(200).res.json(emails);
+    }catch(error){
+        res.status(500).json({error:"Something went wrong"})
+
+    }
+}
+
+const updateEmail = async(req,res) => {
+    const id = req.params.id;
+    const {sender,reciever,subject,body,isDeletedBySender,isDeletedByReceiever} = req.body;
+    const newEmail = {
+        sender:sender,
+        reciever:reciever,
+        subject:subject,
+        body:body,
+        isDeletedBySender:isDeletedBySender,
+        isDeletedByReceiever:isDeletedByReceiever,
+        user:req.user.userId
+    }
+    try{
+        await newEmail.save();
+        res.status(201).json(newEmail);
+        
+    }catch(error){
+        res.status(500).json({error:"something went wrong"});
     }
 }
 
@@ -47,6 +82,8 @@ const deleteEmail = async (req,res) =>
 
 module.exports = {
     sendEmail,
-    getEmail,
+    getReceiveEmail,
+    getSentEmail,
+    updateEmail,
     deleteEmail
 }
